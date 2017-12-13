@@ -119,7 +119,9 @@ exports.create = function (req, res, next) {
             citydata=data;
         });
         debugger;
+        console.info(citydata);
         req1.on('end',function(){
+            console.info(citydata);
             res.render('topic/edit', {
                 tabs: config.tabs,
                 citys:citydata
