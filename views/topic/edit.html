@@ -47,18 +47,18 @@
               <%});%>
             </select>
             <span class="tab-selector">选择城市：</span>
-            <select name="tab-city" id="tab-city-value">
+            <select name="city" id="city-value">
               <option value="">请选择</option>
               <%
-              var tabValue = '';
-              if (typeof(tab-city) !== 'undefined') {
-              tabValue = tab-city;
+              var cityValue = '';
+              if (typeof(city) !== 'undefined') {
+                cityValue = city;
               }
               citys.sub.forEach(function (pair) {
               var value = pair.area_code;
               var text = pair.area_name;
               %>
-              <option value="<%=value%>" <%= tabValue === value ? 'selected': '' %>><%=text%></option>
+              <option value="<%=value%>" <%= cityValue === value ? 'selected': '' %>><%=text%></option>
 
               <%});%>
             </select>
