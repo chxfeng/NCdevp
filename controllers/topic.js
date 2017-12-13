@@ -118,6 +118,7 @@ exports.create = function (req, res, next) {
         req1.on('data',function(data){
             citydata=data;
         });
+        debugger;
         req1.on('end',function(){
             res.render('topic/edit', {
                 tabs: config.tabs,
