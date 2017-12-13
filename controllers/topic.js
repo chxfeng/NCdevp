@@ -114,17 +114,14 @@ exports.index = function (req, res, next) {
 
 exports.create = function (req, res, next) {
     http.get('http://map.baidu.com/?qt=sub_area_list&from=mapapi&areacode=1&level=1&from=mapapi',function(req1,res1){
-        var citydata;
+        var citydata="";
         req1.on('data',function(data){
-            citydata=data;
+            citydata+=data;
         });
-        debugger;
-        console.info(citydata);
         req1.on('end',function(){
-            console.info(citydata);
             res.render('topic/edit', {
                 tabs: config.tabs,
-                citys:citydata
+                citys:JSON.parse(citydata)
             });
         });
     });
