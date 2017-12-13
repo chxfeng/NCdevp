@@ -46,6 +46,22 @@
 
               <%});%>
             </select>
+            <span class="tab-selector">选择城市：</span>
+            <select name="tab-city" id="tab-city-value">
+              <option value="">请选择</option>
+              <%
+              var tabValue = '';
+              if (typeof(tab-city) !== 'undefined') {
+              tabValue = tab-city;
+              }
+              citys.sub.forEach(function (pair) {
+              var value = pair.area_code;
+              var text = pair.area_name;
+              %>
+              <option value="<%=value%>" <%= tabValue === value ? 'selected': '' %>><%=text%></option>
+
+              <%});%>
+            </select>
             <span id="topic_create_warn"></span>
             <textarea autofocus class='span9' id='title' name='title' rows='1'
                       placeholder="标题字数 10 字以上"

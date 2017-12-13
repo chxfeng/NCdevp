@@ -18,7 +18,8 @@ var store        = require('../common/store');
 var config       = require('../config');
 var _            = require('lodash');
 var cache        = require('../common/cache');
-var logger = require('../common/logger')
+var logger = require('../common/logger');
+var http = require('http');
 
 /**
  * Topic page
@@ -112,9 +113,18 @@ exports.index = function (req, res, next) {
 };
 
 exports.create = function (req, res, next) {
-  res.render('topic/edit', {
-    tabs: config.tabs
-  });
+    http.get('http://map.baidu.com/?qt=sub_area_list&from=mapapi&areacode=1&level=1&from=mapapi',function(req1,res1){
+        var citydata;
+        req1.on('data',function(data){
+            citydata=data;
+        });
+        req1.on('end',function(){
+            res.render('topic/edit', {
+                tabs: config.tabs,
+                citys:citydata
+            });
+        });
+    });
 };
 
 
