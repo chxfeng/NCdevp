@@ -19,7 +19,7 @@ var config       = require('../config');
 var _            = require('lodash');
 var cache        = require('../common/cache');
 var logger = require('../common/logger');
-var http = require('http');
+var city        = require('../common/city');
 
 /**
  * Topic page
@@ -113,20 +113,15 @@ exports.index = function (req, res, next) {
 };
 
 exports.create = function (req, res, next) {
-    http.get('http://map.baidu.com/?qt=sub_area_list&from=mapapi&areacode=1&level=1&from=mapapi',function(req1,res1){
-        var citydata="";
-        req1.on('data',function(data){
-            citydata+=data;
-        });
-        req1.on('end',function(){
-            res.render('topic/edit', {
-                tabs: config.tabs,
-                citys:JSON.parse(citydata)
-            });
+    var ep = new EventProxy();
+
+    city.getCitys(function (citys) {
+        res.render('topic/edit', {
+            tabs: config.tabs,
+            citys: citys
         });
     });
 };
-
 
 exports.put = function (req, res, next) {
   var title   = validator.trim(req.body.title);
@@ -195,14 +190,17 @@ exports.showEdit = function (req, res, next) {
     }
 
     if (String(topic.author_id) === String(req.session.user._id) || req.session.user.is_admin) {
-      res.render('topic/edit', {
-        action: 'edit',
-        topic_id: topic._id,
-        title: topic.title,
-        content: topic.content,
-        tab: topic.tab,
-        tabs: config.tabs
-      });
+        city.getCitys(function (citys) {
+            res.render('topic/edit', {
+                action: 'edit',
+                topic_id: topic._id,
+                title: topic.title,
+                content: topic.content,
+                tab: topic.tab,
+                tabs: config.tabs,
+                citys: citys
+            });
+        });
     } else {
       res.renderError('对不起，你不能编辑此话题。', 403);
     }
