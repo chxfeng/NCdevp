@@ -10,9 +10,9 @@ var config = {
 
   get mini_assets() { return !this.debug; }, // 是否启用静态文件的合并压缩，详见视图中的Loader
 
-  name: 'Nodeclub', // 社区名字
-  description: 'CNode：Node.js专业中文社区', // 社区的描述
-  keywords: 'nodejs, node, express, connect, socket.io',
+  name: '分享社区', // 社区名字
+  description: '分享社区', // 社区的描述
+  keywords: '分享社区',
 
   // 添加到 html head 中的信息
   site_headers: [
@@ -23,7 +23,7 @@ var config = {
   // 右上角的导航区
   site_navs: [
     // 格式 [ path, title, [target=''] ]
-    [ '/about', '关于' ]
+    //[ '/about', '关于' ]
   ],
   // cdn host，如 http://cnodejs.qiniudn.com
   site_static_host: '', // 静态文件存储域名
@@ -43,8 +43,8 @@ var config = {
   redis_db: 0,
   redis_password: '',
 
-  session_secret: 'node_club_secret', // 务必修改
-  auth_cookie_name: 'node_club',
+  session_secret: 'share_club_secret', // 务必修改
+  auth_cookie_name: 'share_club',
 
   // 程序运行的端口
   port: 3000,
@@ -54,10 +54,10 @@ var config = {
 
   // RSS配置
   rss: {
-    title: 'CNode：Node.js专业中文社区',
-    link: 'http://cnodejs.org',
+    title: '分享社区',
+    //link: 'http://cnodejs.org',
     language: 'zh-cn',
-    description: 'CNode：Node.js专业中文社区',
+    description: '分享社区',
     //最多获取的RSS Item数量
     max_rss_items: 50
   },
@@ -80,7 +80,7 @@ var config = {
   weibo_id: 'your_weibo_id',
 
   // admin 可删除话题，编辑标签。把 user_login_name 换成你的登录名
-  admins: { user_login_name: true },
+  admins: { admin: true },
 
   // github 登陆的配置
   GITHUB_OAUTH: {
@@ -120,7 +120,7 @@ var config = {
   tabs: [
     ['share', '分享'],
     ['ask', '问答'],
-    ['job', '招聘'],
+    //['job', '招聘'],
   ],
 
   // 极光推送
